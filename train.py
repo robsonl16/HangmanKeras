@@ -1,6 +1,6 @@
 import os
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"   
-os.environ["CUDA_VISIBLE_DEVICES"] = '-1'
+#os.environ["CUDA_VISIBLE_DEVICES"] = '-1'
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
 from tqdm import tqdm
@@ -12,7 +12,7 @@ from keras import optimizers
 
 import numpy as np
 
-with open('words.txt') as f :
+with open('words_250000_train.txt') as f :
     word_src = f.read().splitlines()
 
 len_list = list(map(len, word_src))
@@ -24,12 +24,12 @@ player = NNAgent(policy_net)
 policy_net.summary()
 
 
-save_episode = 5000
-view_episode = 500
+save_episode = 500
+view_episode = 100
 update_episode = 5
 avg_correct = 0
 wins_avg = 0
-n_trials = 20000
+n_trials = 5000
 progbar = tqdm(range(n_trials))
 
 """ 
@@ -71,7 +71,7 @@ for episode_set in progbar :
             wins_avg = 0
 
     if (episode_set +1) % save_episode == 0 :
-        player.model.save('policy.h5', include_optimizer=False)
+        player.model.save('policy1.h5', include_optimizer=False)
 
 print()
 game_params = {'max_lives' : 6}
@@ -82,7 +82,7 @@ Final Phase,
 Collect data by interacting with similar parameter as the actual game.
 """
 
-n_trials = 70000
+n_trials = 5000
 progbar = tqdm(range(n_trials))
 
 player.model.compile(optimizer= optimizers.Adam(3e-5, clipnorm=1))
@@ -116,6 +116,6 @@ for episode_set in progbar :
             wins_avg = 0
 
     if (episode_set +1) % save_episode == 0 :
-        player.model.save('policy.h5', include_optimizer=False)
+        player.model.save('policy1.h5', include_optimizer=False)
 
 
