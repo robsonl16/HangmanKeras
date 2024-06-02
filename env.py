@@ -55,7 +55,7 @@ class Hangman(object) :
     def reset(self) :
         self.curr_live = self.max_lives
         self.pick_random()
-        self.guessing_board = ['-' for i in range(len(self.guess_word))]
+        self.guessing_board = ['_' for i in range(len(self.guess_word))]
         self.correct_guess = 0
         self.guessed = []
         self.done = False
