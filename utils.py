@@ -11,7 +11,7 @@ set_letters = set(string.ascii_lowercase)
 letters = list(set_letters)
 letters.sort()
 letter_dict = {l : i+1 for i, l in enumerate(letters)}
-letter_dict['-'] = 27
+letter_dict['_'] = 27
 
 def pad_sequences(sequences, maxlen=None, dtype='int32',
                   padding='pre', truncating='pre', value=0.):
